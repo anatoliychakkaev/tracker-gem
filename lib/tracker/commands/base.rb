@@ -41,11 +41,20 @@ module Tracker::Command
         raise(CommandFailed, "No project specified.\nRun this command from app folder or set it adding --prj <project id>") if force
         @autodetected_prj = true
       end
-      prj
+      prj["id"].to_id
     end
 
     def extract_project_in_dir(dir)
-      File.read("#{dir}/.tracker").to_i
+      return false unless dir
+      file = "#{dir}/.tracker"
+      if File.exists?(file)
+        JSON.parse(File.read(file))
+      else
+        path = dir.split('/')
+        path = path[0, path.size - 1]
+        upper_dir = path ? path.join('/') : false
+        extract_project_in_dir(upper_dir)
+      end
     end
 
     def extract_option(options, default=true)

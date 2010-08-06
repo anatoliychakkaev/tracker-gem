@@ -9,6 +9,7 @@ require 'tracker/command'
 args = ARGV.dup
 ARGV.clear
 command = args.shift.strip rescue 'help'
-
+ENV['TRACKER_HOST'] = 'tracktheprojects.com'
+ENV['TRACKER_HOST'] = 'web:1602'
 Tracker::Command.run(command, args)
 

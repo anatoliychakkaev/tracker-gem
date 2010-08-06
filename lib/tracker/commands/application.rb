@@ -8,6 +8,16 @@ module Tracker::Command
       p @args.join ' '
     end
 
+    def info
+      project = extract_project_in_dir(Dir.pwd)
+      if project
+        puts "Project:    #{project['name']}"
+        puts "Created at: #{project['created_at']}"
+      else
+        puts "No project"
+      end
+    end
+
     def init
       project_name = @args.join ' '
 
@@ -38,8 +48,9 @@ module Tracker::Command
         end
       end
       if id
+        project = tracker.project id
         File.open("#{Dir.pwd}/.tracker", 'w') do |file|
-          file.puts id
+          file.puts project.to_json
         end
         puts 'Project successfully initialized'
       else

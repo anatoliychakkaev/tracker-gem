@@ -10,7 +10,7 @@ spec = Gem::Specification.new do |s|
   s.email = "anatoliy.chakkaev@gmail.com"
   s.homepage = "http://tracker.tracktheprojects.com"
   s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = '>=1.9'
+  s.required_ruby_version = '>=1.8'
   s.files = Dir['**/**']
   s.executables = [ 'tracker' ]
   #s.test_files = Dir["test/test*.rb"]

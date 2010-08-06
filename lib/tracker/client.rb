@@ -36,6 +36,10 @@ class Tracker::Client
     get 'projects'
   end
 
+  def project(project_id)
+    get("projects/#{project_id}")["project"]
+  end
+
   # Create a new project, with an optional name.
   def create_project(name)
     post('projects', {:name => name})["project"]
